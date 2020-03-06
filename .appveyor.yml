@@ -1,0 +1,22 @@
+# set the build version to simply be the incremental build number
+version: '{build}'
+image:
+  - Visual Studio 2017
+build:
+  verbosity: minimal
+clone_folder: C:\projects\simulate.io
+install:
+  - cd %APPVEYOR_BUILD_FOLDER%
+  - git submodule update --init --recursive
+build_script:
+  - cd C:\projects\simulate.io
+  - cmake --version
+  - dev-build-all.bat < nul
+  - cd build/Win-x64
+  - tree /F /A
+  - echo ======================================================
+  - echo ======================================================
+  - echo ======================================================
+  - echo ======================================================
+  - type simulate.io.vcxproj
+  - type CMakeCache.txt

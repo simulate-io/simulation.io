@@ -1,0 +1,68 @@
+language: cpp
+# https://docs.travis-ci.com/user/reference/osx/
+# each build in the matrix gets run on a fresh image of a VM
+matrix:
+  include:
+    # https://docs.travis-ci.com/user/reference/bionic/
+    # note: bionic (Ubuntu 18.04 LTS) comes with gcc 7.4.0 + clang/llvm 7
+    - os: linux
+      dist: bionic
+      compiler: gcc
+    - os: linux
+      dist: bionic
+      compiler: clang
+    # https://docs.travis-ci.com/user/reference/osx/
+    # macOS 10.13 and Xcode 9.4.1 by default, but i'm going to overwrite with a newer osx_image (macOS 10.13 and Xcode 10.0)
+    # run clang front-end over LLVM back-end
+    - os: osx
+      osx_image: xcode10
+      compiler: clang
+    # run gcc front-end over LLVM back-end (not GNU-gcc)
+    - os: osx
+      osx_image: xcode10
+      compiler: gcc
+# disable travis auto init/update of submodules (since it auto-detects a .gitmodules file)
+git:
+  submodules: false
+before_install:
+  - git submodule update --init --recursive
+script:
+  - cmake --version
+  - ls -l
+  - ./dev-build-all.sh < scripts/travis-nul.txt
+  # note: any directory changing within a shell script is isolated since it runs in a subshell
+  # print out generated files
+  - cd build/Unix-x64
+  - find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
+  - echo ======================================================
+  - echo ======================================================
+  # DEBUG config...
+  # print out file info for the executable (I want to see if x86 or x64)
+  - file Debug/simulate.io
+  # print out these 2 files (useful info)
+  - cat Debug/Makefile
+  - cat Debug/CMakeCache.txt
+  - echo ======================================================
+  - echo ======================================================
+  # MINSIZEREL config...
+  # print out file info for the executable (I want to see if x86 or x64)
+  - file MinSizeRel/simulate.io
+  # print out these 2 files (useful info)
+  - cat MinSizeRel/Makefile
+  - cat MinSizeRel/CMakeCache.txt
+  - echo ======================================================
+  - echo ======================================================
+  # RELEASE config...
+  # print out file info for the executable (I want to see if x86 or x64)
+  - file Release/simulate.io
+  # print out these 2 files (useful info)
+  - cat Release/Makefile
+  - cat Release/CMakeCache.txt
+  - echo ======================================================
+  - echo ======================================================
+  # RELWITHDEBINFO config...
+  # print out file info for the executable (I want to see if x86 or x64)
+  - file RelWithDebInfo/simulate.io
+  # print out these 2 files (useful info)
+  - cat RelWithDebInfo/Makefile
+  - cat RelWithDebInfo/CMakeCache.txt
