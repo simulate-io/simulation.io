@@ -33,9 +33,9 @@ echo BUILDING FOR x64...
 mkdir %Win-x64%
 cmake -H. -B%Win-x64% -G "Visual Studio 15 2017 Win64"
 cmake --build %Win-x64% --config Debug
-cmake --build %Win-x64% --config MinSizeRel
-cmake --build %Win-x64% --config Release
-cmake --build %Win-x64% --config RelWithDebInfo
+:: cmake --build %Win-x64% --config MinSizeRel
+:: cmake --build %Win-x64% --config Release
+:: cmake --build %Win-x64% --config RelWithDebInfo
 :: END of building for x64
 
 :: stop execution of batch file, until user hits a key
