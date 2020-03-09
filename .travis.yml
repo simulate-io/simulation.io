@@ -47,23 +47,23 @@ script:
   - echo ======================================================
   # MINSIZEREL config...
   # print out file info for the executable (I want to see if x86 or x64)
-  - file MinSizeRel/simulate.io
+  # - file MinSizeRel/simulate.io
   # print out these 2 files (useful info)
-  - cat MinSizeRel/Makefile
-  - cat MinSizeRel/CMakeCache.txt
-  - echo ======================================================
-  - echo ======================================================
+  # - cat MinSizeRel/Makefile
+  # - cat MinSizeRel/CMakeCache.txt
+  # - echo ======================================================
+  # - echo ======================================================
   # RELEASE config...
   # print out file info for the executable (I want to see if x86 or x64)
-  - file Release/simulate.io
+  # - file Release/simulate.io
   # print out these 2 files (useful info)
-  - cat Release/Makefile
-  - cat Release/CMakeCache.txt
-  - echo ======================================================
-  - echo ======================================================
+  # - cat Release/Makefile
+  # - cat Release/CMakeCache.txt
+  # - echo ======================================================
+  # - echo ======================================================
   # RELWITHDEBINFO config...
   # print out file info for the executable (I want to see if x86 or x64)
-  - file RelWithDebInfo/simulate.io
+  # - file RelWithDebInfo/simulate.io
   # print out these 2 files (useful info)
-  - cat RelWithDebInfo/Makefile
-  - cat RelWithDebInfo/CMakeCache.txt
+  # - cat RelWithDebInfo/Makefile
+  # - cat RelWithDebInfo/CMakeCache.txt
