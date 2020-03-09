@@ -1,5 +1,7 @@
 # Simulate.io
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8dc3e90b5c73418fb72f11bcf41365d9)](https://app.codacy.com/gh/simulate-io/simulation.io?utm_source=github.com&utm_medium=referral&utm_content=simulate-io/simulation.io&utm_campaign=Badge_Grade_Settings)
+
 C++17 cross-platform Simuation Engine.
 
 
