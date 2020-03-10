@@ -43,6 +43,7 @@ script:
   # print out these 2 files (useful info)
   - cat Debug/Makefile
   - cat Debug/CMakeCache.txt
+  - ./simulate.io
   - echo ======================================================
   - echo ======================================================
   # MINSIZEREL config...

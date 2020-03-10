@@ -1,5 +1,4 @@
-#ifndef PREFIX_UTILS_STRING_UTILS_HPP_
-#define PREFIX_UTILS_STRING_UTILS_HPP_
+#pragma once
 
 #include <algorithm>
 #include <cctype>
@@ -45,5 +44,3 @@ namespace prefix::utils {
         return s;
     }
 }
-
-#endif // PREFIX_UTILS_STRING_UTILS_HPP_

@@ -73,7 +73,19 @@ endif()
 # https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers/issues/1428
 # note: according to cotire manual, the pch.cpp file must be the first listed source file for out target
 # reference: https://github.com/sakra/cotire/blob/master/MANUAL.md#using-a-manually-maintained-prefix-header-instead-of-the-automatically-generated-one
-add_executable(simulate.io "${CMAKE_CURRENT_SOURCE_DIR}/include/simulate.io/pch.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
+
+set( 
+    source_list
+    "${CMAKE_CURRENT_SOURCE_DIR}/include/simulate.io/pch.h" 
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/utils/json.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/utils/string-utils.hpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp"
+)
+
+add_executable(simulate.io  ${source_list})
+
+#YM: As of CMake 3.8 it supports TREE to recursivley search file paths for source structure,
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${source_list})
 
 # reference: https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/
 # SCOPE SPECIFIERS...
@@ -128,3 +140,11 @@ set_target_properties(simulate.io PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "${CM
 # must call this after setting all target properties of simulate.io
 # apply cotire function on our target
 cotire(simulate.io)
+
+# YM: adding the assets directory after the build is complete.
+add_custom_command(
+        TARGET simulate.io POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_SOURCE_DIR}/assets/main.json
+                ${CMAKE_CURRENT_BINARY_DIR}/assets/main.json
+)
