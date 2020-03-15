@@ -16,7 +16,7 @@ public:
 	/* @brief: Starts the fight with given heroes */
 	void BeginFight() override;
 
-	/* @brief: Logs results of the battle to console*/
+	/* @brief: Logs results of the battle to console */
 	void LogResults();
 
 	~MeleeBattle() override {}

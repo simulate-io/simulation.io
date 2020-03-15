@@ -10,9 +10,11 @@ C++17 cross-platform Simuation Engine.
 ---
 
 ## Automation
+
 - Coming soon!
 
 ## Supported compilers
+
 #### Minimum versions:
 - GCC (libstdc++) 7
 - Clang (libc++) 6

@@ -79,7 +79,8 @@ file(GLOB source_list
 "src/battles/*.cpp"
 "src/characters/*.cpp"
 "include/*.h"
-"include/game/*.h")
+"include/game/*.h"
+"/src/utils/*.hpp")
 
 add_executable(simulate.io  ${source_list})
 
@@ -139,3 +140,11 @@ set_target_properties(simulate.io PROPERTIES COTIRE_CXX_PREFIX_HEADER_INIT "${CM
 # must call this after setting all target properties of simulate.io
 # apply cotire function on our target
 cotire(simulate.io)
+
+# YM: adding the assets directory after the build is complete.
+add_custom_command(
+        TARGET simulate.io POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+                ${CMAKE_SOURCE_DIR}/assets/main.json
+                ${CMAKE_CURRENT_BINARY_DIR}/assets/main.json
+)
