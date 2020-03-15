@@ -73,7 +73,18 @@ endif()
 # https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers/issues/1428
 # note: according to cotire manual, the pch.cpp file must be the first listed source file for out target
 # reference: https://github.com/sakra/cotire/blob/master/MANUAL.md#using-a-manually-maintained-prefix-header-instead-of-the-automatically-generated-one
-add_executable(simulate.io "${CMAKE_CURRENT_SOURCE_DIR}/include/simulate.io/pch.h" "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp")
+
+file(GLOB source_list
+"src/*.cpp"
+"src/battles/*.cpp"
+"src/characters/*.cpp"
+"include/*.h"
+"include/game/*.h")
+
+add_executable(simulate.io  ${source_list})
+
+#YM: As of CMake 3.8 it supports TREE to recursivley search file paths for source structure,
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${source_list})
 
 # reference: https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/
 # SCOPE SPECIFIERS...
