@@ -38,5 +38,4 @@ int main(int argc, char* argv[]) {
 	std::cout << "Version: " << main_json["v_simulate.io"] << std::endl;
 
 	return 0;
-
 }

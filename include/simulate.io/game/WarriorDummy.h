@@ -1,8 +1,8 @@
-#include "ICharacter.h"
+#pragma once
 
 #include <string>
 
-#pragma once
+#include "ICharacter.h"
 
 class WarriorDummy : public ICharacter
 {
