@@ -74,13 +74,13 @@ endif()
 # note: according to cotire manual, the pch.cpp file must be the first listed source file for out target
 # reference: https://github.com/sakra/cotire/blob/master/MANUAL.md#using-a-manually-maintained-prefix-header-instead-of-the-automatically-generated-one
 
-set( 
-    source_list
-    "${CMAKE_CURRENT_SOURCE_DIR}/include/simulate.io/pch.h" 
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/utils/json.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/utils/string-utils.hpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp"
-)
+file(GLOB source_list
+"src/*.cpp"
+"src/battles/*.cpp"
+"src/characters/*.cpp"
+"include/*.h"
+"include/game/*.h"
+"/src/utils/*.hpp")
 
 add_executable(simulate.io  ${source_list})
 
