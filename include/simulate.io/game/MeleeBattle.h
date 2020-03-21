@@ -1,7 +1,7 @@
+#pragma once
+
 #include "IBattle.h"
 #include "ICharacter.h"
-
-#pragma once
 
 class MeleeBattle : public IBattle
 {

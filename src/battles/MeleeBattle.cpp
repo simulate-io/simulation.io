@@ -1,12 +1,11 @@
+#include <iostream>
+
 #include "simulate.io/game/MeleeBattle.h"
 #include "simulate.io/game/ICharacter.h"
 
-#include <iostream>
-
 void MeleeBattle::BeginFight()
 {
-	int damageAtacker = 0;
-	int damageDefender = 0;
+	int damageAtacker, damageDefender;
 
 	// KE: Simple battle loop untill winner is determine
 	while (m_HeroAtacker.GetHealth() > 0 
