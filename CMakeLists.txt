@@ -124,7 +124,7 @@ if(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang" OR CMAKE_CXX_COMPILER_ID STREQUAL
     target_compile_options(simulate.io PRIVATE -Wall -Wextra)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     target_link_libraries(simulate.io dl pthread)
-    target_compile_options(simulate.io PRIVATE -Wall -Wextra)
+    target_compile_options(simulate.io PRIVATE -Wall -Wextra -pthread -ldl)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(simulate.io PRIVATE /W4)
 endif()
