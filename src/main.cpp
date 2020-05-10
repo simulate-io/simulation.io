@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
 
     std::string version = main_json["v_simulate.io"];
 
-	LOG_F(INFO,"Version:%s" , version.data());
+	LOG_F(INFO,"Version: %s" , version.data());
 
 	return 0;
 }

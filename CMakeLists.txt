@@ -84,12 +84,12 @@ file(GLOB source_list
 
 add_executable(simulate.io  ${source_list})
 
-#YM: As of CMake 3.8 it supports TREE to recursivley search file paths for source structure,
+#YM: As of CMake 3.8 it supports TREE to recursively search file paths for source structure,
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${source_list})
 
 # reference: https://pabloariasal.github.io/2018/02/19/its-time-to-do-cmake-right/
 # SCOPE SPECIFIERS...
-# PRVATE - for internal building of target
+# PRIVATE - for internal building of target
 # INTERFACE - for external users (usage requirements) of target
 # PUBLIC = both PRIVATE and INTERFACE
 # thus the include/ directory is PUBLIC since it is needed for both internally building target and external users to possess
@@ -120,8 +120,10 @@ target_include_directories(simulate.io
 #)
 
 # reference: https://stackoverflow.com/questions/10046114/in-cmake-how-can-i-test-if-the-compiler-is-clang
-if(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+if(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     target_compile_options(simulate.io PRIVATE -Wall -Wextra)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+    target_compile_options(simulate.io PRIVATE -Wall -lpthread -ldl)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(simulate.io PRIVATE /W4)
 endif()
