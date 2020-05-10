@@ -1,6 +1,12 @@
 # building...
 build/
 
+#Log file
+simulate.io.txt
+
+#Clion
+.idea
+
 # CMake...
 CMakeCache.txt
 CMakeFiles
