@@ -6,29 +6,29 @@
 
 void MeleeBattle::BeginFight()
 {
-	int damageAtacker, damageDefender;
+	int damageAttacker, damageDefender;
 
-	// KE: Simple battle loop untill winner is determine
-	while (m_HeroAtacker.GetHealth() > 0 
+	// KE: Simple battle loop until winner is determine
+	while (m_HeroAttacker.GetHealth() > 0
 		&& m_HeroDefender.GetHealth() > 0)
 	{
-		if (m_HeroAtacker.GetHealth() > 0)
+		if (m_HeroAttacker.GetHealth() > 0)
 		{
-			damageAtacker = m_HeroAtacker.DealDamage();
-			m_HeroDefender.GetDamaged(damageAtacker);
+			damageAttacker = m_HeroAttacker.DealDamage();
+			m_HeroDefender.GetDamaged(damageAttacker);
 		}
 		if (m_HeroDefender.GetHealth() > 0)
 		{
 			damageDefender = m_HeroDefender.DealDamage();
-			m_HeroAtacker.GetDamaged(damageDefender);
+			m_HeroAttacker.GetDamaged(damageDefender);
 		}
 	}
 }
 
 // KE: log results of the battle to std
-void MeleeBattle::LogResults()
+void MeleeBattle::LogResults() const
 {
-	if(m_HeroAtacker.GetHealth() > 0)
+	if(m_HeroAttacker.GetHealth() > 0)
 	{
 		LOG_F(INFO, "Attacker Won");
 	}
