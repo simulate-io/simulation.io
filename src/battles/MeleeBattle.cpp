@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "utils/log/loguru.hpp"
 #include "simulate.io/game/MeleeBattle.h"
 #include "simulate.io/game/ICharacter.h"
 
@@ -29,19 +30,19 @@ void MeleeBattle::LogResults()
 {
 	if(m_HeroAtacker.GetHealth() > 0)
 	{
-		std::cout << "Atacker Won" << std::endl;
+		LOG_F(INFO, "Attacker Won");
 	}
 	else
 	{
-		std::cout << "Atacker Lost" << std::endl;
+		LOG_F(INFO, "Attacker Lost");
 	}
 
 	if(m_HeroDefender.GetHealth() > 0)
 	{
-	std::cout << "Defender Won" << std::endl;
+		LOG_F(INFO, "Defender Won");
 	}
 	else
 	{
-		std::cout << "Defender Lost" << std::endl;
+		LOG_F(INFO, "Defender Lost");
 	}
 }
