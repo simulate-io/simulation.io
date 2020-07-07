@@ -17,3 +17,5 @@ public:
 
 	virtual ~ICharacter() = default;
 };
+
+typedef std::pair<ICharacter&, ICharacter&> FightersPair_t;

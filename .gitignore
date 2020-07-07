@@ -1,5 +1,6 @@
 # building...
 build/
+lib/
 
 # CMake...
 CMakeCache.txt
@@ -13,3 +14,5 @@ compile_commands.json
 CTestTestfile.cmake
 simulate.code-workspace
 .vscode/
+.idea/
+cmake-build-debug/

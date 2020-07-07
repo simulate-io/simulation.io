@@ -78,6 +78,7 @@ file(GLOB source_list
 "src/*.cpp"
 "src/battles/*.cpp"
 "src/characters/*.cpp"
+"src/game/*.cpp"
 "include/*.h"
 "include/game/*.h"
 "/src/utils/*.hpp")
