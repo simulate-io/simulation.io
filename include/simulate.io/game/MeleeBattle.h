@@ -10,7 +10,7 @@ public:
 	MeleeBattle() = delete;
 
 	MeleeBattle(ICharacter&& h1, ICharacter&& h2)
-	: m_HeroAtacker(h1)
+	: m_HeroAttacker(h1)
 	, m_HeroDefender(h2)
 	{}
 
@@ -18,11 +18,11 @@ public:
 	void BeginFight() override;
 
 	/* @brief: Logs results of the battle to console */
-	void LogResults() override;
+	void LogResults() const override;
 
 	~MeleeBattle() override {}
 
 private:
-	ICharacter& m_HeroAtacker;
+	ICharacter& m_HeroAttacker;
 	ICharacter& m_HeroDefender;
 };

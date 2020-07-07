@@ -14,7 +14,7 @@ public:
 		m_currentHealth = 100;
 	};
 
-	std::string Getname() const override {return m_name;}
+	std::string GetName() const override {return m_name;}
 
 	int GetHealth() const override { return m_currentHealth; }
 

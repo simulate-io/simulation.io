@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
 
 	//TODO: move as a part of Battle consumer to run in multiple threads
     std::thread th(std::move(battlesToRun[0].battleTask), battlesToRun[0].pbattle);
-	th.join(); 
+	th.join();
 
 	// YM: Importing main.json
     std::error_code error;

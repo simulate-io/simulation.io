@@ -7,7 +7,7 @@ class ICharacter
 {
 public:
 
-	virtual std::string Getname() const = 0;
+	virtual std::string GetName() const = 0;
 
 	virtual int GetHealth() const = 0;
 
