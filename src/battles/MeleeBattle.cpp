@@ -1,8 +1,7 @@
-#include <iostream>
-
-#include "utils/log/loguru.hpp"
 #include "simulate.io/game/MeleeBattle.h"
 #include "simulate.io/game/ICharacter.h"
+
+#include "utils/log/loguru.hpp"
 
 void MeleeBattle::BeginFight()
 {
