@@ -42,6 +42,8 @@ add_subdirectory(deps/googletest)
 enable_testing()
 include_directories(${googletest_SOURCE_DIR}/include)
 
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
 # for MSVC, switch to multi-threaded static linking of MSVCRT runtime library
 if(MSVC)
     # init CompilerFlags variable as a list of these terms found in the cmake cache file
@@ -52,6 +54,8 @@ if(MSVC)
         CMAKE_CXX_FLAGS_RELEASE
         CMAKE_CXX_FLAGS_RELWITHDEBINFO
     )
+    # YM - Adding to disable the warning C4996 on windows
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
     # check each of these cache entries and replace any /MD with /MT and /MDd with /MTd
     # note: since these variables are already in the cache, the pattern set(... CACHE ... FORCE) must be used to overwrite it
     foreach(CompilerFlag ${CompilerFlags})
@@ -79,12 +83,13 @@ file(GLOB source_list
 "src/battles/*.cpp"
 "src/characters/*.cpp"
 "src/game/*.cpp"
+"src/managers/*.cpp"
 "include/*.h"
 "include/game/*.h"
+"include/managers/*.h"
 "/src/utils/*.hpp")
 
 add_executable(simulate.io  ${source_list})
-
 #YM: As of CMake 3.8 it supports TREE to recursively search file paths for source structure,
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${source_list})
 
@@ -129,6 +134,8 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "C
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(simulate.io PRIVATE /W4)
 endif()
+
+add_test(NAME simulate.io-test COMMAND runUnitTests)
 
 # reference: https://stackoverflow.com/questions/7304625/how-do-i-change-the-startup-project-of-a-visual-studio-solution-via-cmake
 # sets the startup project in the Visual Studio solution (so that user doesn't have to explicitly right click target and set option)
