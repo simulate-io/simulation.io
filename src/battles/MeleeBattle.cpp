@@ -1,8 +1,7 @@
-#include <iostream>
+#include "game/MeleeBattle.h"
+#include "game/ICharacter.h"
 
 #include "utils/log/loguru.hpp"
-#include "simulate.io/game/MeleeBattle.h"
-#include "simulate.io/game/ICharacter.h"
 
 void MeleeBattle::BeginFight()
 {
@@ -25,7 +24,6 @@ void MeleeBattle::BeginFight()
 	}
 }
 
-// KE: log results of the battle to std
 void MeleeBattle::LogResults() const
 {
 	if(m_HeroAttacker.GetHealth() > 0)
