@@ -1,13 +1,13 @@
-#include "simulate.io/game/BattleConsumer.h"
+#include "game/BattleConsumer.h"
 
 #include "utils/log/loguru.hpp"
 
 #include <thread>
 
-void BattleConsumer::RunBattles(int const threadNum)
+void BattleConsumer::RunBattles(unsigned const threadNum)
 {
     // KE: Do not allow more threads that Consumer has committed for
-    const int k_threadCounter = (threadNum > m_maxThreadNumber) ? m_maxThreadNumber : threadNum;
+    const int k_threadCounter = (threadNum > 0) ? threadNum : 1;
     LOG_F(INFO, "Running battles in %d Threads", k_threadCounter);
 
     int availableThreadCounter = k_threadCounter;

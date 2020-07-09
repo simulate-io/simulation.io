@@ -1,7 +1,7 @@
-#include "simulate.io/game/ICharacter.h"
-#include "simulate.io/game/BattleProducer.h"
-#include "simulate.io/game/IBattle.h"
-#include "simulate.io/game/MeleeBattle.h"
+#include "game/ICharacter.h"
+#include "game/BattleProducer.h"
+#include "game/IBattle.h"
+#include "game/MeleeBattle.h"
 
 void BattleProducer::CreateWork()
 {

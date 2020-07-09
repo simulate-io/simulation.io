@@ -1,8 +1,8 @@
 #pragma once
 
-#include "simulate.io/game/ICharacter.h"
-#include "simulate.io/game/IBattle.h"
-#include "simulate.io/game/BattleTypes.h"
+#include "ICharacter.h"
+#include "IBattle.h"
+#include "BattleTypes.h"
 
 #include <vector>
 
@@ -30,8 +30,8 @@ private:
     std::vector<FightersPair_t> m_fighterPairs;
     BattleTask m_battleTask;
 
-    // EK: cache all created battles
+    // KE: cache all created battles
     std::vector<std::shared_ptr<IBattle>> m_savedBattles;
-    // EK: battle tasks ready to be run
+    // KE: battle tasks ready to be run
 	BattlePackageTaskVector m_battles;
 };

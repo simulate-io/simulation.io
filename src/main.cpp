@@ -1,15 +1,16 @@
-#include "simulate.io/game/ICharacter.h"
-#include "simulate.io/game/WarriorDummy.h"
-#include "simulate.io/game/MeleeBattle.h"
-#include "simulate.io/game/BattleProducer.h"
-#include "simulate.io/game/BattleConsumer.h"
+#include "game/ICharacter.h"
+#include "game/WarriorDummy.h"
+#include "game/MeleeBattle.h"
+#include "game/BattleProducer.h"
+#include "game/BattleConsumer.h"
+#include "utils/OsUtils.h"
 
 #include "utils/json.hpp"
 #define JSONPATH "./assets/main.json"
 #include "utils/string-utils.hpp"
 #include "utils/log/loguru.cpp"
 #include "utils/filesystem.hpp"
-#include "simulate.io/pch.h"
+#include "utils/pch.h"
 
 #include <vector>
 
@@ -39,6 +40,9 @@ int main(int argc, char* argv[])
 	loguru::add_file("simulate.io.txt", loguru::Append, loguru::Verbosity_MAX);
 	LOG_F(INFO, "Starting simulate.io");
 
+	// TODO: move as a part of SimulationManager
+	OsUtils osUtils = OsUtils();
+
     // TODO: move as a part of GameManager class that will decide on which characters to send
     WarriorDummy attacker;
     WarriorDummy defender;
@@ -54,7 +58,7 @@ int main(int argc, char* argv[])
 
 	// KE: Create consumer and run all the battles
     BattleConsumer consumer(battlesToRun);
-    consumer.RunBattles(1);
+    consumer.RunBattles(osUtils.GetAvailableThreads());
 
 	// YM: Importing main.json
     std::error_code error;

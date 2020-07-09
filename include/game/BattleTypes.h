@@ -1,7 +1,7 @@
 #pragma once
 
-#include "simulate.io/game/ICharacter.h"
-#include "simulate.io/game/IBattle.h"
+#include "ICharacter.h"
+#include "IBattle.h"
 
 #include <future>
 #include <vector>
