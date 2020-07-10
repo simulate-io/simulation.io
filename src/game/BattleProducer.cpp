@@ -2,6 +2,7 @@
 #include "game/BattleProducer.h"
 #include "game/IBattle.h"
 #include "game/MeleeBattle.h"
+#include "game/BattleTypes.h"
 
 void BattleProducer::CreateWork()
 {
@@ -20,7 +21,13 @@ void BattleProducer::CreateWork()
     }
 }
 
-BattlePackageTaskVector BattleProducer::GetBattleQueue() const
+void BattleProducer::Init(std::vector<FightersPair_t>&& fighterPairs, void (*battleTask)(std::shared_ptr<IBattle>))
+{
+    m_fighterPairs = fighterPairs;
+    m_battleTask = BattleTask(battleTask);
+}
+
+BattlePackageTaskVector const& BattleProducer::GetBattleQueue() const
 {
 	return m_battles;
 }

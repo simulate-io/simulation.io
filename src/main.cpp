@@ -52,12 +52,14 @@ int main(int argc, char* argv[])
     fighterPairsVect.emplace_back(fighterPair);
 
     // KE: Tasks Producer to work on the characters battles to be run
-	BattleProducer producer(fighterPairsVect, &BattleStarter);
+	BattleProducer producer = BattleProducer();
+	producer.Init(std::move(fighterPairsVect), &BattleStarter);
     producer.CreateWork();
 	BattlePackageTaskVector battlesToRun = producer.GetBattleQueue();
 
 	// KE: Create consumer and run all the battles
-    BattleConsumer consumer(battlesToRun);
+    BattleConsumer consumer = BattleConsumer();
+    consumer.Init(std::make_shared<BattlePackageTaskVector>(battlesToRun));
     consumer.RunBattles(osUtils.GetAvailableThreads());
 
 	// YM: Importing main.json

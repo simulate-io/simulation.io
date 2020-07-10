@@ -5,17 +5,17 @@
 class BattleConsumer
 {
 public:
-    BattleConsumer() = delete;
 
-    //@param BattlePackageTaskVector
-    BattleConsumer(BattlePackageTaskVector const& battlesToRun)
-    : m_battlesToRun(battlesToRun)
-    {}
+    BattleConsumer() {};
+
+    // @brief Assign the ptr
+    // @param BattlePackageTaskVectorPtr
+    void Init(std::shared_ptr<BattlePackageTaskVector> battlesToRun);
 
     // @brief start running battles
     // @params number of threads to run battles
     void RunBattles(unsigned const threadNum);
 
 private:
-    BattlePackageTaskVector const& m_battlesToRun;
+    std::shared_ptr<BattlePackageTaskVector> m_pBattlesToRun;
 };

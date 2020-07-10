@@ -9,22 +9,18 @@
 class BattleProducer
 {
 public:
-    BattleProducer() = delete;
+	BattleProducer() {}
 
     //@param vector of pair of characters
     //@param function pointer to battle to run
     //TODO: create a proper function pointer type for battleTask
-	BattleProducer(std::vector<FightersPair_t> fighterPairs, void (*battleTask)(std::shared_ptr<IBattle>))
-	: m_fighterPairs(fighterPairs)
-    {
-        m_battleTask = BattleTask(battleTask);
-    }
+    void Init(std::vector<FightersPair_t>&& fighterPairs, void (*battleTask)(std::shared_ptr<IBattle>));
 
-	// signal to create work
+	// @brief signal to create work
 	void CreateWork();
 
 	// returns queue with battles to be run
-	BattlePackageTaskVector GetBattleQueue() const;
+	BattlePackageTaskVector const& GetBattleQueue() const;
 private:
 
     std::vector<FightersPair_t> m_fighterPairs;
