@@ -15,11 +15,11 @@ matrix:
     # macOS 10.13 and Xcode 9.4.1 by default, but i'm going to overwrite with a newer osx_image (macOS 10.13 and Xcode 10.0)
     # run clang front-end over LLVM back-end
     - os: osx
-      osx_image: xcode10
+      osx_image: xcode12
       compiler: clang
     # run gcc front-end over LLVM back-end (not GNU-gcc)
     - os: osx
-      osx_image: xcode10
+      osx_image: xcode12
       compiler: gcc
 # disable travis auto init/update of submodules (since it auto-detects a .gitmodules file)
 git:
