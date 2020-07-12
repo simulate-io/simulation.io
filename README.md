@@ -1,6 +1,8 @@
 # Simulate.io
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8dc3e90b5c73418fb72f11bcf41365d9)](https://app.codacy.com/gh/simulate-io/simulation.io?utm_source=github.com&utm_medium=referral&utm_content=simulate-io/simulation.io&utm_campaign=Badge_Grade_Settings)
+[![Build Status](https://travis-ci.org/simulate-io/simulation.io.svg?branch=dev)](https://travis-ci.org/simulate-io/simulation.io)
+[![Build status](https://ci.appveyor.com/api/projects/status/qp8s5j2phskjjq4f?svg=true)](https://ci.appveyor.com/project/yasster/simulation-io)
 
 C++17 cross-platform Simuation Engine.
 
