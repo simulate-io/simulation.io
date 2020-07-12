@@ -1,3 +1,48 @@
 {
-    "v_simulate.io": "0.0.1v"
+    "v_simulate.io": "0.0.1v",
+    "v_battles": {
+        "attacker": [{
+                "name": "Cory",
+                "maxHealth": 120,
+                "damage": 15
+            },
+            {
+                "name": "Jim",
+                "maxHealth": 90,
+                "damage": 25
+            },
+            {
+                "name": "Gary",
+                "maxHealth": 100,
+                "damage": 30
+            },
+            {
+                "name": "John",
+                "maxHealth": 120,
+                "damage": 15
+            }
+
+        ],
+        "defenders": [{
+                "name": "Albert",
+                "maxHealth": 120,
+                "damage": 15
+            },
+            {
+                "name": "Bert",
+                "maxHealth": 85,
+                "damage": 50
+            },
+            {
+                "name": "Elmer",
+                "maxHealth": 120,
+                "damage": 15
+            },
+            {
+                "name": "Joe",
+                "maxHealth": 120,
+                "damage": 15
+            }
+        ]
+    }
 }

@@ -4,7 +4,7 @@ class IBattle
 {
 public:
 
-	virtual void LogResults() = 0;
+	virtual void LogResults() const = 0;
 
 	virtual void BeginFight() = 0;
 
