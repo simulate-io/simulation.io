@@ -3,6 +3,7 @@
 
 #include "utils/noncopyable.h"
 #include <vector>
+#include <memory>
 
 using Battles_vec_ptr = std::shared_ptr<std::vector<FightersPair_t>>;
 
