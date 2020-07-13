@@ -5,7 +5,7 @@
 #include <thread>
 
 
-void BattleConsumer::Init(std::shared_ptr<BattlePackageTaskVector> battlesToRun)
+void BattleConsumer::Init(std::shared_ptr<BattlePackageTaskVector> battlesToRun, unsigned const threadsNum)
 {
     // KE: if we did not pass any battles then we wasting time
     assert(battlesToRun.get());
@@ -18,12 +18,19 @@ void BattleConsumer::Init(std::shared_ptr<BattlePackageTaskVector> battlesToRun)
     {
         m_pBattlesToRun = battlesToRun;
     }
+
+    if(threadsNum == 0)
+    {
+        LOG_F(WARNING, "Threads are set to 0, may have to wait longer before running tasks");
+    }
+
+    m_threads = threadsNum;
 }
 
-void BattleConsumer::RunBattles(unsigned const threadNum)
+void BattleConsumer::RunBattles()
 {
     // KE: Do not allow more threads that Consumer has committed for
-    const int k_threadCounter = (threadNum > 0) ? threadNum : 1;
+    const int k_threadCounter = (m_threads > 0) ? m_threads : 1;
     LOG_F(INFO, "Running battles in %d Threads", k_threadCounter);
 
     int availableThreadCounter = k_threadCounter;

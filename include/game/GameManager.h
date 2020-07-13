@@ -1,6 +1,8 @@
 #include "game/BattleProducer.h"
 #include "game/BattleConsumer.h"
 
+#include "utils/log/loguru.hpp"
+
 class GameManager
 {
 public:
@@ -10,7 +12,15 @@ public:
     , m_battleProducer(battleProducer)
     {}
 
+    void Init(std::shared_ptr<std::vector<FightersPair_t>> pFighterPairsVect);
+
+    std::shared_ptr<std::vector<FightersPair_t>> GetFighters();
+
+    BattleFuncPtr GetBattleFunc();
+
 private:
     BattleConsumer const& m_battleConsumer;
     BattleProducer const& m_battleProducer;
+
+    std::shared_ptr<std::vector<FightersPair_t>> m_pFighterPairsVect;
 };

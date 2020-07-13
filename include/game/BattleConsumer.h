@@ -8,14 +8,15 @@ public:
 
     BattleConsumer() {};
 
-    // @brief Assign the ptr
+    // @brief Initialize Consumer
     // @param BattlePackageTaskVectorPtr
-    void Init(std::shared_ptr<BattlePackageTaskVector> battlesToRun);
+    // @params number of threads to run battles
+    void Init(std::shared_ptr<BattlePackageTaskVector> battlesToRun, unsigned const threadNum);
 
     // @brief start running battles
-    // @params number of threads to run battles
-    void RunBattles(unsigned const threadNum);
+    void RunBattles();
 
 private:
     std::shared_ptr<BattlePackageTaskVector> m_pBattlesToRun;
+    unsigned int m_threads;
 };

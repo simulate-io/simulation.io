@@ -2,7 +2,6 @@
 
 #include "ICharacter.h"
 #include "IBattle.h"
-#include "BattleTypes.h"
 
 #include <future>
 #include <vector>
@@ -20,3 +19,5 @@ struct BattlePackageTask_t
 };
 
 typedef std::vector<BattlePackageTask_t> BattlePackageTaskVector;
+
+typedef void (*BattleFuncPtr)(std::shared_ptr<IBattle>);
