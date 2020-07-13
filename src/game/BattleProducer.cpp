@@ -6,6 +6,13 @@
 
 #include "utils/log/loguru.hpp"
 
+void BattleProducer::Init(std::shared_ptr<std::vector<FightersPair_t>> pFighterPairs, BattleFuncPtr battleTask)
+{
+    m_pFighterPairs = pFighterPairs;
+    m_battleTask = BattleTask(battleTask);
+    CreateWork_();
+}
+
 void BattleProducer::CreateWork_()
 {
     if(!m_pFighterPairs.get())
@@ -27,13 +34,6 @@ void BattleProducer::CreateWork_()
         BattlePackageTask_t package(m_battleTask, pBattle);
         m_battles.push_back(package);
     }
-}
-
-void BattleProducer::Init(std::shared_ptr<std::vector<FightersPair_t>> pFighterPairs, BattleFuncPtr battleTask)
-{
-    m_pFighterPairs = pFighterPairs;
-    m_battleTask = BattleTask(battleTask);
-    CreateWork_();
 }
 
 BattlePackageTaskVector const& BattleProducer::GetBattleQueue() const

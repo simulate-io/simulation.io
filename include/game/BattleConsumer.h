@@ -14,7 +14,7 @@ public:
     void Init(std::shared_ptr<BattlePackageTaskVector> battlesToRun, unsigned const threadNum);
 
     // @brief start running battles
-    void RunBattles();
+    void RunBattles() const;
 
 private:
     std::shared_ptr<BattlePackageTaskVector> m_pBattlesToRun;

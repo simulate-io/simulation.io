@@ -18,6 +18,8 @@ public:
 
     BattleFuncPtr GetBattleFunc();
 
+    void RunBattles();
+
 private:
     BattleConsumer const& m_battleConsumer;
     BattleProducer const& m_battleProducer;

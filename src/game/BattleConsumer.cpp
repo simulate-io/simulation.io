@@ -27,7 +27,7 @@ void BattleConsumer::Init(std::shared_ptr<BattlePackageTaskVector> battlesToRun,
     m_threads = threadsNum;
 }
 
-void BattleConsumer::RunBattles()
+void BattleConsumer::RunBattles() const
 {
     // KE: Do not allow more threads that Consumer has committed for
     const int k_threadCounter = (m_threads > 0) ? m_threads : 1;

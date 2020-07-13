@@ -46,8 +46,8 @@ int main(int argc, char* argv[])
     producer.Init(gameManager.GetFighters(), gameManager.GetBattleFunc());
     consumer.Init(std::make_shared<BattlePackageTaskVector>(producer.GetBattleQueue()), osUtils.GetAvailableThreads());
 
-	// KE: Create consumer and run all the battles
-    consumer.RunBattles();
+	// KE: Task the Game to uun Battles
+    gameManager.RunBattles();
 
 	// YM: Importing main.json
     std::error_code error;

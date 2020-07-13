@@ -38,3 +38,8 @@ BattleFuncPtr GameManager::GetBattleFunc()
 {
     return &BattleStarter;
 }
+
+void GameManager::RunBattles()
+{
+    m_battleConsumer.RunBattles();
+}
