@@ -4,30 +4,27 @@
 #include "IBattle.h"
 #include "BattleTypes.h"
 
+#include <memory>
 #include <vector>
 
 class BattleProducer
 {
 public:
-    BattleProducer() = delete;
+	BattleProducer() {}
 
     //@param vector of pair of characters
     //@param function pointer to battle to run
     //TODO: create a proper function pointer type for battleTask
-	BattleProducer(std::vector<FightersPair_t> fighterPairs, void (*battleTask)(std::shared_ptr<IBattle>))
-	: m_fighterPairs(fighterPairs)
-    {
-        m_battleTask = BattleTask(battleTask);
-    }
+    void Init(std::shared_ptr<std::vector<FightersPair_t>> fighterPairs, BattleFuncPtr battleTask);
 
-	// signal to create work
-	void CreateWork();
+	// @brief signal to create work
+	void CreateWork_();
 
 	// returns queue with battles to be run
-	BattlePackageTaskVector GetBattleQueue() const;
+	BattlePackageTaskVector const& GetBattleQueue() const;
 private:
 
-    std::vector<FightersPair_t> m_fighterPairs;
+    std::shared_ptr<std::vector<FightersPair_t>> m_pFighterPairs;
     BattleTask m_battleTask;
 
     // KE: cache all created battles

@@ -1,21 +1,23 @@
 #pragma once
 
 #include "BattleTypes.h"
+#include <memory>
 
 class BattleConsumer
 {
 public:
-    BattleConsumer() = delete;
 
-    //@param BattlePackageTaskVector
-    BattleConsumer(BattlePackageTaskVector const& battlesToRun)
-    : m_battlesToRun(battlesToRun)
-    {}
+    BattleConsumer() {};
+
+    // @brief Initialize Consumer
+    // @param BattlePackageTaskVectorPtr
+    // @params number of threads to run battles
+    void Init(std::shared_ptr<BattlePackageTaskVector> battlesToRun, unsigned const threadNum);
 
     // @brief start running battles
-    // @params number of threads to run battles
-    void RunBattles(unsigned const threadNum);
+    void RunBattles() const;
 
 private:
-    BattlePackageTaskVector const& m_battlesToRun;
+    std::shared_ptr<BattlePackageTaskVector> m_pBattlesToRun;
+    unsigned int m_threads;
 };
