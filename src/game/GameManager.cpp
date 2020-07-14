@@ -1,12 +1,12 @@
 #include "game/ICharacter.h"
-#include "game/WarriorDummy.h"
 #include "game/MeleeBattle.h"
-#include "game/BattleProducer.h"
-#include "game/BattleConsumer.h"
 #include "game/GameManager.h"
 #include "game/BattleTypes.h"
 
 #include "utils/log/loguru.hpp"
+
+#include <memory>
+#include <vector>
 
 // EK: function to execute a simple battle
 // TODO: move as a part of GameManager class that will decide on which function to run

@@ -1,6 +1,5 @@
 #include "game/ICharacter.h"
 #include "game/WarriorDummy.h"
-#include "game/MeleeBattle.h"
 #include "game/BattleProducer.h"
 #include "game/BattleConsumer.h"
 #include "game/GameManager.h"
@@ -8,7 +7,6 @@
 
 #include "utils/json.hpp"
 #define JSONPATH "./assets/main.json"
-#include "utils/string-utils.hpp"
 #include "utils/log/loguru.cpp"
 #include "utils/filesystem.hpp"
 #include "utils/pch.h"
@@ -46,7 +44,7 @@ int main(int argc, char* argv[])
     producer.Init(gameManager.GetFighters(), gameManager.GetBattleFunc());
     consumer.Init(std::make_shared<BattlePackageTaskVector>(producer.GetBattleQueue()), osUtils.GetAvailableThreads());
 
-	// KE: Task the Game to uun Battles
+	// KE: Task the Game to run Battles
     gameManager.RunBattles();
 
 	// YM: Importing main.json

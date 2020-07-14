@@ -4,6 +4,7 @@
 #include "IBattle.h"
 
 #include <future>
+#include <memory>
 #include <vector>
 
 typedef std::packaged_task<void(std::shared_ptr<IBattle>)> BattleTask;

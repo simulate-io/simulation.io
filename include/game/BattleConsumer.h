@@ -1,6 +1,7 @@
 #pragma once
 
 #include "BattleTypes.h"
+#include <memory>
 
 class BattleConsumer
 {

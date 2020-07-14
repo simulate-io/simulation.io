@@ -2,6 +2,8 @@
 
 #include "utils/log/loguru.hpp"
 
+#include <memory>
+#include <vector>
 #include <thread>
 
 

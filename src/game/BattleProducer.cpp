@@ -6,6 +6,10 @@
 
 #include "utils/log/loguru.hpp"
 
+#include <memory>
+#include <vector>
+
+
 void BattleProducer::Init(std::shared_ptr<std::vector<FightersPair_t>> pFighterPairs, BattleFuncPtr battleTask)
 {
     m_pFighterPairs = pFighterPairs;

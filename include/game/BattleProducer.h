@@ -4,6 +4,7 @@
 #include "IBattle.h"
 #include "BattleTypes.h"
 
+#include <memory>
 #include <vector>
 
 class BattleProducer

@@ -3,6 +3,9 @@
 
 #include "utils/log/loguru.hpp"
 
+#include <memory>
+#include <vector>
+
 class GameManager
 {
 public:
