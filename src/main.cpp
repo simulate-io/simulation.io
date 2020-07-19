@@ -3,10 +3,10 @@
 #include "game/MeleeBattle.h"
 #include "game/BattleProducer.h"
 #include "game/BattleConsumer.h"
-#include "utils/OsUtils.h"
-
-#include "utils/json.hpp"
+#include "managers/JsonManager.h"
 #define JSONPATH "./assets/main.json"
+#include "utils/OsUtils.h"
+#include "utils/json.hpp"
 #include "utils/string-utils.hpp"
 #include "utils/log/loguru.cpp"
 #include "utils/filesystem.hpp"
@@ -43,6 +43,21 @@ int main(int argc, char* argv[])
 	// TODO: move as a part of SimulationManager
 	OsUtils osUtils = OsUtils();
 
+    // YM: simple json manager implementation with no ownership on the data
+    // TODO: move JsonManager as part of SimulationManager
+    JsonManager p_jsonManager;
+
+    // YM: Importing main.json
+    std::error_code error;
+    bool bExists = fs::exists(JSONPATH, error);
+    fs::exists(JSONPATH, error);
+	assert( bExists && "./assets/main.json not found!");
+    // YM: the return type is shared_ptr use .get() or .release();
+    p_jsonManager.Init(JSONPATH);
+
+    Battles_vec_ptr jsonData = p_jsonManager.Get();
+
+
     // TODO: move as a part of GameManager class that will decide on which characters to send
     WarriorDummy attacker;
     WarriorDummy defender;
@@ -59,18 +74,7 @@ int main(int argc, char* argv[])
 	// KE: Create consumer and run all the battles
     BattleConsumer consumer(battlesToRun);
     consumer.RunBattles(osUtils.GetAvailableThreads());
-
-	// YM: Importing main.json
-    std::error_code error;
-    bool bExists = fs::exists(JSONPATH, error);
-	assert( bExists && "./assets/main.json not found!");
-
-	std::ifstream stream(JSONPATH);
-	json main_json = json::parse(stream);
-
-    std::string version = main_json["v_simulate.io"];
-
-	LOG_F(INFO,"Version: %s" , version.data());
+	
 
 	return 0;
 }

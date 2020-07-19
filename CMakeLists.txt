@@ -42,6 +42,8 @@ add_subdirectory(deps/googletest)
 enable_testing()
 include_directories(${googletest_SOURCE_DIR}/include)
 
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
 # for MSVC, switch to multi-threaded static linking of MSVCRT runtime library
 if(MSVC)
     # init CompilerFlags variable as a list of these terms found in the cmake cache file
@@ -52,6 +54,8 @@ if(MSVC)
         CMAKE_CXX_FLAGS_RELEASE
         CMAKE_CXX_FLAGS_RELWITHDEBINFO
     )
+    # YM - Adding to disable the warning C4996 on windows
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
     # check each of these cache entries and replace any /MD with /MT and /MDd with /MTd
     # note: since these variables are already in the cache, the pattern set(... CACHE ... FORCE) must be used to overwrite it
     foreach(CompilerFlag ${CompilerFlags})
@@ -75,18 +79,19 @@ endif()
 # reference: https://github.com/sakra/cotire/blob/master/MANUAL.md#using-a-manually-maintained-prefix-header-instead-of-the-automatically-generated-one
 
 file(GLOB source_list
+"include/*.h"
+"include/game/*.h"
+"include/managers/*.h"
+"include/utils/*.h"
 "src/*.cpp"
 "src/battles/*.cpp"
 "src/characters/*.cpp"
 "src/game/*.cpp"
-"include/*.h"
-"include/game/*.h"
+"src/managers/*.cpp"
 "src/utils/*.hpp"
-"include/utils/*.h"
 "src/utils/*.cpp")
 
 add_executable(simulate.io  ${source_list})
-
 #YM: As of CMake 3.8 it supports TREE to recursively search file paths for source structure,
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR} FILES ${source_list})
 
@@ -123,14 +128,16 @@ target_include_directories(simulate.io
 #)
 
 # reference: https://stackoverflow.com/questions/10046114/in-cmake-how-can-i-test-if-the-compiler-is-clang
-if(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
+if(CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang" AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     target_compile_options(simulate.io PRIVATE -Wall -Wextra)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-    target_link_libraries(simulate.io dl pthread)
-    target_compile_options(simulate.io PRIVATE -Wall -Wextra -pthread -ldl)
+    target_compile_options(simulate.io PRIVATE -Wall -Wextra)
+    target_link_libraries(simulate.io pthread ${CMAKE_DL_LIBS})
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
     target_compile_options(simulate.io PRIVATE /W4)
 endif()
+
+add_test(NAME simulate.io-test COMMAND runUnitTests)
 
 # reference: https://stackoverflow.com/questions/7304625/how-do-i-change-the-startup-project-of-a-visual-studio-solution-via-cmake
 # sets the startup project in the Visual Studio solution (so that user doesn't have to explicitly right click target and set option)
