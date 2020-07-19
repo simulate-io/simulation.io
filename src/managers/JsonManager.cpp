@@ -1,30 +1,17 @@
 #include "managers/JsonManager.h"
-#include "utils/json.hpp"
 #include "utils/log/loguru.hpp"
-#include "game/WarriorDummy.h"
+
 #include <fstream>
 #include <algorithm>
 #include <random>
-using json = nlohmann::json;
 
-JsonManager::JsonManager()
+
+// YM: This needs to be more abstract later due to design
+// There should not be functions that reflect the data structure in the json
+std::vector<WarriorDummy> JsonManager::ParseAttacker(json jsonData)
 {
-}
-
-auto p_Battles = std::make_shared<std::vector<FightersPair_t> >();
-
-Battles_vec_ptr JsonManager::Init(const char* path)
-{    std::ifstream stream(path);
-     json main_json = json::parse(stream);
-
-    std::string version = main_json["v_simulate.io"];
-    LOG_F(INFO,"Version: %s" , version.data());
-
-    auto attackers = main_json["v_battles"]["attacker"];
-    auto defenders = main_json["v_battles"]["attacker"];
-
+    json attackers = jsonData["v_battles"]["attackers"];
     std::vector<WarriorDummy> attackersList;
-    std::vector<WarriorDummy> defendersList;
 
     for(const auto& character: attackers)
     {
@@ -37,6 +24,14 @@ Battles_vec_ptr JsonManager::Init(const char* path)
         );
     }
 
+    return attackersList;
+}
+
+std::vector<WarriorDummy> JsonManager::ParseDefender(json jsonData)
+{
+    json defenders = jsonData["v_battles"]["defenders"];
+    std::vector<WarriorDummy> defendersList;
+
     for(const auto& character: defenders)
     {
         defendersList.emplace_back(
@@ -48,21 +43,60 @@ Battles_vec_ptr JsonManager::Init(const char* path)
         );
     }
 
-    auto rnd = std::random_device();
-    std::shuffle(std::begin(attackersList), std::end(attackersList), rnd);
-    std::shuffle(std::begin(defendersList), std::end(defendersList), rnd);
+    return defendersList;
+}
 
-    assert(attackersList.size() == defendersList.size() && "Attackers and Defender list must be the same.");
-    const size_t length = attackersList.size();
+
+void JsonManager::ShuffleData(std::vector<WarriorDummy> attacker, std::vector<WarriorDummy> defender)
+{
+    auto rnd = std::random_device();
+    std::shuffle(std::begin(attacker), std::end(attacker), rnd);
+    std::shuffle(std::begin(defender), std::end(defender), rnd);
+
+    assert(attacker.size() == defender.size() && "Attackers and Defender list must be the same.");
+    const size_t length = defender.size();
+
     for (int i = 0; i < length; i++)
     {
-        WarriorDummy att_random = remove_at_return(attackersList, attackersList.size() - 1 );
-        WarriorDummy def_random = remove_at_return(defendersList, defendersList.size() - 1 );
+        WarriorDummy att_random = remove_at_return(attacker, attacker.size() - 1 );
+        WarriorDummy def_random = remove_at_return(defender, defender.size() - 1 );
 
         FightersPair_t pair = FightersPair_t(att_random, def_random);
 
-        p_Battles.get()->push_back(pair);
+        mp_parsedData.get()->push_back(pair);
     }
+}
 
-    return p_Battles;
+void JsonManager::Init(const char* path)
+{
+    std::ifstream stream(path);
+    // checking if file is not empty
+    bool isEmpty = stream.peek() == std::ifstream::traits_type::eof();
+    if( !isEmpty )
+    {
+        json main_json = json::parse(stream);
+
+        std::string version = main_json["v_simulate.io"];
+
+        auto data = main_json["v_battles"]["attackers"];
+        LOG_F(INFO,"Version: %s" , version.data());
+
+        auto attackersList = ParseAttacker(main_json);
+        auto defendersList = ParseDefender(main_json);
+
+        ShuffleData(attackersList, defendersList);
+        LOG_F(INFO, "JSON data is parsed.");
+    } else {
+        LOG_F(ERROR, "JSON file at %s is empty", path );
+        assert(isEmpty);
+    }
+}
+
+Battles_vec_ptr JsonManager::Get()
+{
+    if(mp_parsedData.get() != nullptr)
+    {
+        return mp_parsedData;
+    }
+    return nullptr;
 }

@@ -1,7 +1,8 @@
 {
     "v_simulate.io": "0.0.1v",
     "v_battles": {
-        "attacker": [{
+        "attackers": [
+            {
                 "name": "Cory",
                 "maxHealth": 120,
                 "damage": 15
@@ -23,7 +24,8 @@
             }
 
         ],
-        "defenders": [{
+        "defenders": [
+            {
                 "name": "Albert",
                 "maxHealth": 120,
                 "damage": 15

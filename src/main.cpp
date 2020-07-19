@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
 
     // YM: simple json manager implementation with no ownership on the data
     // TODO: move JsonManager as part of SimulationManager
-    JsonManager* p_jsonManager = new JsonManager();
+    JsonManager p_jsonManager;
 
     // YM: Importing main.json
     std::error_code error;
@@ -53,7 +53,9 @@ int main(int argc, char* argv[])
     fs::exists(JSONPATH, error);
 	assert( bExists && "./assets/main.json not found!");
     // YM: the return type is shared_ptr use .get() or .release();
-    Battles_vec_ptr jsonBattle = p_jsonManager->Init(JSONPATH);
+    p_jsonManager.Init(JSONPATH);
+
+    Battles_vec_ptr jsonData = p_jsonManager.Get();
 
 
     // TODO: move as a part of GameManager class that will decide on which characters to send
